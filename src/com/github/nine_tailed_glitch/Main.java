@@ -1,7 +1,9 @@
 package com.github.nine_tailed_glitch;
 
+import com.github.nine_tailed_glitch.task1.Launch;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("A'm alive!");
+        Launch.start();
     }
 }
