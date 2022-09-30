@@ -10,7 +10,7 @@ public abstract class AbstractLaunch {
     }
 
     // генерация чисел в диапазоне [min, max]
-    private int rnd(int min, int max) {
+    protected int rnd(int min, int max) {
         max -= min;
         return (int) (Math.random() * ++max) + min;
     }
