@@ -11,7 +11,9 @@ import java.util.List;
 public class Launch extends AbstractLaunch {
     @Override
     public void start() {
-        new Lesson4();
+//        new Lesson4();
+//        new Lesson5().writeFileProperty();
+        new Lesson5().readFileProperty();
     }
 
     private void lesson3() {
