@@ -11,7 +11,7 @@ import java.util.List;
 public class Launch extends AbstractLaunch {
     @Override
     public void start() {
-        lesson3();
+        new Lesson4();
     }
 
     private void lesson3() {
