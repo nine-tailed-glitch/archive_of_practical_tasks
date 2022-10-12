@@ -2,6 +2,9 @@ package com.github.nine_tailed_glitch.task2;
 
 import com.github.nine_tailed_glitch.general.AbstractLaunch;
 
+/*
+ * - O(n^2)
+ * */
 public class Launch extends AbstractLaunch {
 
     @Override
