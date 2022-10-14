@@ -15,14 +15,14 @@ class HomeWork1 {
         File[] files = srcDir.listFiles();
 
 //        //разделение массива
-//        final int middle = files.length / 2;
+//        final int middle = files.size / 2;
 //        File[] files1 = new File[middle];
-//        System.arraycopy(files, 0, files1, 0, files1.length);
+//        System.arraycopy(files, 0, files1, 0, files1.size);
 //        HW1ImageResizer resizer1 = new HW1ImageResizer(files1, NEW_WIDTH, outFolder, start);
 ////        new Thread(resizer1).start();
 //
-//        File[] files2 = new File[files.length - middle];
-//        System.arraycopy(files, middle, files2, 0, files2.length);
+//        File[] files2 = new File[files.size - middle];
+//        System.arraycopy(files, middle, files2, 0, files2.size);
 //        HW1ImageResizer resizer2 = new HW1ImageResizer(files2, NEW_WIDTH, outFolder, start);
 ////        new Thread(resizer2).start();
 
