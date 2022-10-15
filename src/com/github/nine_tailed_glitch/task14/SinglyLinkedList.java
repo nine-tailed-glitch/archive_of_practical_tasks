@@ -1,6 +1,6 @@
 package com.github.nine_tailed_glitch.task14;
 
-public class SinglyLinkedList {
+public class SinglyLinkedList<T> {
     private ListItem firstItem;
     private int countItems;
 
@@ -9,8 +9,8 @@ public class SinglyLinkedList {
         countItems = 0;
     }
 
-    public void add(Data data) {
-        ListItem newItem = new ListItem(data, null);
+    public void add(T data) {
+        ListItem<T> newItem = new ListItem<>(data, null);
         if (firstItem == null) {
             firstItem = newItem;
             countItems++;
@@ -22,12 +22,12 @@ public class SinglyLinkedList {
         countItems++;
     }
 
-    public Data getNext() {
+    public T getNext() {
         if (countItems > 0) {
             ListItem oldItem = firstItem;
             firstItem = firstItem.getNext();
             countItems--;
-            return oldItem.getData();
+            return (T) oldItem.getData();
         }
         throw new NullPointerException("Список пуст");
     }

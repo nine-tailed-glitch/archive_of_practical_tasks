@@ -5,7 +5,7 @@ import com.github.nine_tailed_glitch.general.AbstractLaunch;
 public class Launch extends AbstractLaunch {
     @Override
     public void start() {
-        SinglyLinkedList list = new SinglyLinkedList();
+        SinglyLinkedList<Data> list = new SinglyLinkedList<>();
 
         try {
             list.add(new Data(1));
