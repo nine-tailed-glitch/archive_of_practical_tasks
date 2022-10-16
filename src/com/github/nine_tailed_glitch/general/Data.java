@@ -1,4 +1,4 @@
-package com.github.nine_tailed_glitch.task14;
+package com.github.nine_tailed_glitch.general;
 
 // какие-то данные
 public class Data {
