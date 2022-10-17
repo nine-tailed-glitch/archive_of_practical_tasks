@@ -23,11 +23,30 @@ public class SinglyLinkedList<T> {
     }
 
     public T getNext() {
-        if (countItems > 0) {
+        if (size() > 0) {
             ListItem oldItem = firstItem;
             firstItem = firstItem.getNext();
             countItems--;
             return (T) oldItem.getData();
+        }
+        throw new NullPointerException("Список пуст");
+    }
+
+    public T getLast() {
+        if (size() > 0) {
+            ListItem currentItem = firstItem;
+            ListItem prevItem = null;
+            while (currentItem.getNext() != null) {
+                prevItem = currentItem;
+                currentItem = currentItem.getNext();
+            }
+
+            if (prevItem != null)
+                prevItem.setNext(null);
+
+            countItems--;
+
+            return (T) currentItem.getData();
         }
         throw new NullPointerException("Список пуст");
     }

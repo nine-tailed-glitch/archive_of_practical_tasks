@@ -15,7 +15,7 @@ public class Launch extends AbstractLaunch {
                 list.add(new Data(3));
                 list.add(new Data(4));
                 while (true) {
-                    System.out.println(list.getNext());
+                    System.out.println(list.getLast());
 
                     if (list.size() == 0)
                         break;
