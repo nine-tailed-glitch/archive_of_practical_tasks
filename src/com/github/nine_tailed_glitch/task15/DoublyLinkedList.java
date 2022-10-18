@@ -57,6 +57,24 @@ public class DoublyLinkedList {
         throw new NullPointerException("Список пуст");
     }
 
+    public Data get(int index) {
+        if (size() > 0) {
+
+            if (index < 0 || index >= size()) {
+                throw new IllegalArgumentException("Недопустимый индекс");
+            }
+
+            if (index < size() / 2) { // достаем через отсчет от первого
+
+
+            }
+            else { // достаем через отсчет от последнего
+
+            }
+        }
+        throw new NullPointerException("Список пуст");
+    }
+
 
     public int size() {
         return countItems;
