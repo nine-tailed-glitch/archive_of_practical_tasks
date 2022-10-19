@@ -10,12 +10,12 @@ public class Launch extends AbstractLaunch {
         DoublyLinkedList list = new DoublyLinkedList();
         try {
             for (int i = 0; i < 3; i++) {
+                list.add(new Data(0));
                 list.add(new Data(1));
+                list.add(new Data(2));
                 list.add(new Data(3));
-                list.add(new Data(7));
-                list.add(new Data(9));
                 while (true) {
-                    System.out.println(list.getNextLast());
+                    System.out.println(list.get(1));
 
                     if (list.size() == 0)
                         break;

@@ -66,23 +66,9 @@ public class DoublyLinkedList {
 
             if (index < size() / 2) { // достаем через отсчет от первого
 
-                ListItem itemGet = null;
-                ListItem itemCurrent = firstItem;
-                for (int i = 0; i < index; i++) {
-                    itemCurrent = itemCurrent.getNext();
-                }
-                itemGet = itemCurrent.getNext();
-                if (itemGet == firstItem) {
-                    firstItem = firstItem.getNext();
-                    firstItem.setPrev(null);
-                }
-                else {
-                    // todo: соеденить предыдущий и следующий
-                }
-
             }
             else { // достаем через отсчет от последнего
-                // todo: не забыть сделать расчет верной позиции
+
             }
         }
         throw new NullPointerException("Список пуст");
