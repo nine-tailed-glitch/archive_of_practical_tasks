@@ -8,23 +8,28 @@ public class Launch extends AbstractLaunch {
     public void start() {
 
         DoublyLinkedList list = new DoublyLinkedList();
-        try {
-            for (int i = 0; i < 3; i++) {
+//        try {
+//            //for (int i = 0; i < 3; i++) {
+//            {
                 list.add(new Data(0));
-                list.add(new Data(1));
-                list.add(new Data(2));
-                list.add(new Data(3));
-                while (true) {
-                    System.out.println(list.get(1));
+//                list.add(new Data(1));
+//                list.add(new Data(2));
+//                list.add(new Data(3));
 
-                    if (list.size() == 0)
-                        break;
-                }
+                System.out.println("> " + list.get(0));
+                System.out.println("> " + list.size());
+                System.out.println();
+
+                list.viewAllFromBeginning();
                 System.out.println("--------");
-            }
-        }
-        catch (NullPointerException e) {
-            System.out.println(e.getMessage());
-        }
+                list.viewAllFromEnd();
+//            }
+//        }
+//        catch (NullPointerException e) {
+//            System.out.println(e.getMessage());
+//        }
+//        catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 }

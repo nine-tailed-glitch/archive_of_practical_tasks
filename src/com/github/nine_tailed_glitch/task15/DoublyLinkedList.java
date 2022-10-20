@@ -36,7 +36,7 @@ public class DoublyLinkedList {
             if (firstItem != null)
                 firstItem.setPrev(null);
 
-            countItems--;
+            decCountItem();
 
             return oldItem.getData();
         }
@@ -50,7 +50,7 @@ public class DoublyLinkedList {
             if (lastItem != null)
                 lastItem.setNext(null);
 
-            countItems--;
+            decCountItem();
 
             return oldItem.getData();
         }
@@ -66,14 +66,83 @@ public class DoublyLinkedList {
 
             if (index < size() / 2) { // достаем через отсчет от первого
 
+                // отсчитываем наш элемент (именно до index - 1)
+                ListItem currentItem = firstItem;
+                for (int i = 0; i < index; i++) {
+                    currentItem = currentItem.getNext();
+                }
+
+                // устанавливаем связи
+                connectSurroundingElements(currentItem);
+                decCountItem();
+                return currentItem.getData();
+
             }
             else { // достаем через отсчет от последнего
+                // находим наш элемент
+                ListItem currentItem = lastItem;
+                for (int i = size() - 1; i > index; i--) {
+                    currentItem = currentItem.getPrev();
+                }
 
+                // устанавливаем связи
+                connectSurroundingElements(currentItem);
+                decCountItem();
+                return currentItem.getData();
             }
         }
         throw new NullPointerException("Список пуст");
     }
 
+    private void connectSurroundingElements(ListItem currentItem) {
+        if (size() > 0) {
+            if (currentItem == firstItem) {
+                firstItem = firstItem.getNext();
+                if (firstItem != null)
+                    firstItem.setPrev(null);
+            }
+            else if (currentItem == lastItem) {
+                lastItem = lastItem.getPrev();
+                lastItem.setNext(null);
+            }
+            else {
+                ListItem next = currentItem.getNext();
+                ListItem prev = currentItem.getPrev();
+                prev.setNext(next);
+                if (next != null) {
+                    next.setPrev(prev);
+                }
+            }
+        }
+        else {
+            System.out.println("Список пуст");
+        }
+    }
+
+    public void viewAllFromBeginning () {
+        ListItem current = firstItem;
+        while (current != null) {
+            System.out.println(current.getData());
+            current = current.getNext();
+        }
+    }
+
+    public void viewAllFromEnd () {
+        ListItem current = lastItem;
+        while (current != null) {
+            System.out.println(current.getData());
+            current = current.getPrev();
+        }
+    }
+
+    private void decCountItem() {
+        countItems--;
+        if (countItems <= 0) {
+            firstItem = null;
+            lastItem = null;
+            countItems = 0;
+        }
+    }
 
     public int size() {
         return countItems;
