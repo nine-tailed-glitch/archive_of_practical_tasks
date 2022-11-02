@@ -17,7 +17,8 @@ public class Launch extends AbstractLaunch {
         }
     }
 
-    private boolean isSimple(int n) {
+    // изменение модификаторов для внешних вызовов
+    public static boolean isSimple(int n) {
         if (n < 2)
             return false;
         double sqrt = Math.sqrt(n);
