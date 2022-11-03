@@ -39,7 +39,7 @@ public abstract class AbstractLaunch {
         System.out.println("Матрица: ");
         for (int[] line : matrix) {
             for (int item : line) {
-                System.out.printf("%d ", item);
+                System.out.printf("%d\t", item);
             }
             System.out.println();
         }
