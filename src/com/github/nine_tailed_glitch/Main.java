@@ -1,6 +1,6 @@
 package com.github.nine_tailed_glitch;
 
-import com.github.nine_tailed_glitch.task21.Launch;
+import com.github.nine_tailed_glitch.task22.Launch;
 
 public class Main {
     public static void main(String[] args) {
