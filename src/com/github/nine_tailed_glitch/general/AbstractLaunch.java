@@ -24,5 +24,26 @@ public abstract class AbstractLaunch {
         System.out.println();
     }
 
+    // заполнение матрицы
+    protected void fillingMatrix(int[][] matrix, int min, int max) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                matrix[i][j] = rnd(min, max);
+            }
+        }
+        printMatrix(matrix);
+    }
+
+    // распечатка матрицы
+    protected void printMatrix(int[][] matrix) {
+        System.out.println("Матрица: ");
+        for (int[] line : matrix) {
+            for (int item : line) {
+                System.out.printf("%d ", item);
+            }
+            System.out.println();
+        }
+    }
+
     public abstract void start();
 }
