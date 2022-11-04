@@ -22,7 +22,11 @@ public class Launch extends AbstractLaunch {
         printArray(array);
     }
 
-    private void sort(int[] array, int from, int to) {
+    public static void sort(int[] array) {
+        sort(array, 0, array.length - 1);
+    }
+
+    private static void sort(int[] array, int from, int to) {
         if (from < to) {
             int pivot = partition(array, from, to);
             sort(array, from, pivot - 1);
@@ -31,7 +35,7 @@ public class Launch extends AbstractLaunch {
     }
 
     // перекидываем элементы
-    private int partition(int[] array, int from, int to) {
+    private static int partition(int[] array, int from, int to) {
         int pivot = selectPivot(from, to);
         swap(array, pivot, to);
         int store = from;
@@ -47,13 +51,13 @@ public class Launch extends AbstractLaunch {
         return pivot;
     }
 
-    private void swap(int[] array, int index1, int index2) {
+    private static void swap(int[] array, int index1, int index2) {
         int tmp = array[index1];
         array[index1] = array[index2];
         array[index2] = tmp;
     }
 
-    private int selectPivot(int first, int last) {
+    private static int selectPivot(int first, int last) {
         return (first + last) / 2;
     }
 }
