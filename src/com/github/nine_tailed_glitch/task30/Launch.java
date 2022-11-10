@@ -6,40 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Launch extends AbstractLaunch {
+
+    private List<TranslationKey> keys = new ArrayList<>();
+
     @Override
     public void start() {
 
-        System.out.println(convertArabicToRoman(1));
-        System.out.println(convertArabicToRoman(2));
-        System.out.println(convertArabicToRoman(3));
-        System.out.println(convertArabicToRoman(4));
-        System.out.println(convertArabicToRoman(5));
-        System.out.println(convertArabicToRoman(6));
-        System.out.println(convertArabicToRoman(7));
-        System.out.println(convertArabicToRoman(8));
-        System.out.println(convertArabicToRoman(9));
-        System.out.println(convertArabicToRoman(10));
-        System.out.println(convertArabicToRoman(3999));
-        System.out.println(convertArabicToRoman(40));
-        System.out.println(convertArabicToRoman(41));
-        System.out.println(convertArabicToRoman(90));
-    }
-
-//      В настоящее время в римской системе счисления используются следующие знаки:
-//      I = 1; V = 5; X = 10; L = 50; C = 100; D = 500; M = 1000.
-//      Все целые числа от 1 до 3999 записываются с помощью приведенных выше цифр. При этом:
-//          + если большая цифра стоит перед меньшей, они складываются: VI = 5 + 1 = 6; XV = 10 + 5 = 15; LX = 50 + 10 = 60; CL = 100 + 50 = 150;
-//          + если меньшая цифра стоит перед большей (в этом случае она не может повторяться), то меньшая вычитается из большей; вычитаться могут только цифры, обозначающие 1 или степени 10;
-//              уменьшаемым может быть только цифра, ближайшая в числовом ряду к вычитаемой: IV = 5 - 1 = 4; IX = 10 - 1 = 9; XL = 50 - 10 = 40; XC = 100 - 10 = 90;
-//          + цифры V, L, D не могут повторяться; цифры I, X, C, M могут повторяться не более трех раз подряд: VIII = 8; LXXX = 80; DCCC = 800; MMMD = 3500.
-//          + (не используется т.к. здесь [1;3999]) черта над цифрой увеличивает ее значение в 1 000 раз
-
-    private String convertArabicToRoman(int num) {
-        if (num < 1 || num > 3999) {
-            throw new RuntimeException("Ошибка преобразования, граница преобразования [1, 3999]");
-        }
-
-        List<TranslationKey> keys = new ArrayList<>();
         // расположение: просто в порядке убывания arabic (тех, которые важны)
         keys.add(new TranslationKey(1000, "M"));
         keys.add(new TranslationKey(900, "CM"));
@@ -55,6 +27,63 @@ public class Launch extends AbstractLaunch {
         keys.add(new TranslationKey(4, "IV"));
         keys.add(new TranslationKey(1, "I"));
 
+
+        // быстрая сверка данных (а-ля тесты)
+        List<Integer> values = new ArrayList<>();
+        for (int i = 1; i <= 21; i++) {
+            values.add(i);
+        }
+        values.add(3999);
+        values.add(39);
+        values.add(40);
+        values.add(98);
+
+
+        for (Integer value : values) {
+            String str = convertArabicToRoman(value);
+            Integer num = convertRomanToArabic(str);
+            System.out.printf("%d\t%s\t%d\t%b\n", value, str, num, value.equals(num));
+        }
+    }
+
+//      В настоящее время в римской системе счисления используются следующие знаки:
+//      I = 1; V = 5; X = 10; L = 50; C = 100; D = 500; M = 1000.
+//      Все целые числа от 1 до 3999 записываются с помощью приведенных выше цифр. При этом:
+//          + если большая цифра стоит перед меньшей, они складываются: VI = 5 + 1 = 6; XV = 10 + 5 = 15; LX = 50 + 10 = 60; CL = 100 + 50 = 150;
+//          + если меньшая цифра стоит перед большей (в этом случае она не может повторяться), то меньшая вычитается из большей; вычитаться могут только цифры, обозначающие 1 или степени 10;
+//              уменьшаемым может быть только цифра, ближайшая в числовом ряду к вычитаемой: IV = 5 - 1 = 4; IX = 10 - 1 = 9; XL = 50 - 10 = 40; XC = 100 - 10 = 90;
+//          + цифры V, L, D не могут повторяться; цифры I, X, C, M могут повторяться не более трех раз подряд: VIII = 8; LXXX = 80; DCCC = 800; MMMD = 3500.
+//          + (не используется т.к. здесь [1;3999]) черта над цифрой увеличивает ее значение в 1 000 раз
+
+    private int convertRomanToArabic(String num) {
+
+        StringBuilder sbNum = new StringBuilder(num);
+
+        int res = 0;
+        while (sbNum.length() > 0) {    // переводим до тех пор пока строка не закончится (т.е. пока не распознаем все цифры)
+            for (TranslationKey key : keys) {
+
+                String substring;
+                if (key.getRoman().length() <= sbNum.length()) {    // проверка (по длине) сможем ли достать подстроку для проверки
+                    substring = sbNum.substring(0, key.getRoman().length());
+                }
+                else {
+                    continue;
+                }
+
+                if (substring.equals(key.getRoman())) { // совпадает ли подстрока с ключом
+                    sbNum.delete(0, key.getRoman().length());   // удаляем опознанный (-ые) символ (-ы)
+                    res += key.getArabic(); // последовательно суммируем значения
+                }
+            }
+        }
+        return res;
+    }
+
+    private String convertArabicToRoman(int num) {
+        if (num < 1 || num > 3999) {
+            throw new RuntimeException("Ошибка преобразования, граница преобразования [1, 3999]");
+        }
 
         StringBuilder res = new StringBuilder(); // результат
         int index = 0; // текущий элемент keys
@@ -82,25 +111,17 @@ public class Launch extends AbstractLaunch {
         private int arabic;
         private String roman;
 
-        public TranslationKey(int arabic, String roman) {
+        TranslationKey(int arabic, String roman) {
             this.arabic = arabic;
             this.roman = roman;
         }
 
-        public int getArabic() {
+        int getArabic() {
             return arabic;
         }
 
-        public void setArabic(int arabic) {
-            this.arabic = arabic;
-        }
-
-        public String getRoman() {
+        String getRoman() {
             return roman;
-        }
-
-        public void setRoman(String roman) {
-            this.roman = roman;
         }
     }
 
