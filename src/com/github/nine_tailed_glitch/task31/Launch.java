@@ -7,6 +7,7 @@ public class Launch extends AbstractLaunch {
     public void start() {
 //        printRectangle(7, 3);
 //        printFourIsoscelesRightTriangles(15);
+        printIsoscelesTriangles(10);
     }
 
     // прямоугольник
@@ -62,6 +63,20 @@ public class Launch extends AbstractLaunch {
     private void printLine(int countSymbols) {
         for (int i = 0; i < countSymbols; i++) {
             System.out.print("\u002B\u0020"); // "+[space]" in hex
+        }
+        System.out.println();
+    }
+
+    private void printIsoscelesTriangles(final int leg) {
+        int countSymbol = 1;
+
+        for (int i = 0; i < leg; i++) {
+            for (int j = 0; j < leg - countSymbol; j++) {
+                System.out.print("\u0020\u0020"); // "[space][space]" in hex
+            }
+
+            printLine(countSymbol + (countSymbol - 1));
+            countSymbol++;
         }
         System.out.println();
     }
