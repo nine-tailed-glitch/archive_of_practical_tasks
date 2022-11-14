@@ -7,7 +7,7 @@ public class Launch extends AbstractLaunch {
     public void start() {
 //        printRectangle(7, 3);
 //        printFourIsoscelesRightTriangles(15);
-        printIsoscelesTriangles(10);
+//        printFourIsoscelesTriangles(10);
     }
 
     // прямоугольник
@@ -67,9 +67,10 @@ public class Launch extends AbstractLaunch {
         System.out.println();
     }
 
-    private void printIsoscelesTriangles(final int leg) {
-        int countSymbol = 1;
 
+    private void printFourIsoscelesTriangles(final int leg) {
+        // обычный равнобедренный треугольник
+        int countSymbol = 1;
         for (int i = 0; i < leg; i++) {
             for (int j = 0; j < leg - countSymbol; j++) {
                 System.out.print("\u0020\u0020"); // "[space][space]" in hex
@@ -79,5 +80,51 @@ public class Launch extends AbstractLaunch {
             countSymbol++;
         }
         System.out.println();
+
+        // обычный перевернутый равнобедренный треугольник
+        countSymbol = leg;
+        for (int i = 0; i < leg; i++) {
+            for (int j = 0; j < leg - countSymbol; j++) {
+                System.out.print("\u0020\u0020"); // "[space][space]" in hex
+            }
+
+            printLine(countSymbol + (countSymbol - 1));
+            countSymbol--;
+        }
+        System.out.println();
+
+        // обычный повернутый вправо равнобедренный треугольник
+        final int countLine = leg * 2 - 1;
+        countSymbol = 1;
+        for (int i = 0; i < countLine; i++) {
+            for (int j = 0; j < countSymbol; j++) {
+                System.out.print("\u002B\u0020"); // "+[space]" in hex
+            }
+            System.out.println();
+
+            if (i < countLine / 2)
+                countSymbol++;
+            else
+                countSymbol--;
+        }
+
+        // обычный повернутый влево равнобедренный треугольник
+        for (int i = 0; i < countLine; i++) {
+            for (int j = 0; j < leg - countSymbol - 1; j++) {
+                System.out.print("\u0020\u0020"); // "[space][space]" in hex
+            }
+
+            for (int j = 0; j <= countSymbol; j++) {
+                System.out.print("\u002B\u0020"); // "+[space]" in hex
+            }
+            System.out.println();
+
+            if (i < countLine / 2)
+                countSymbol++;
+            else
+                countSymbol--;
+        }
+
     }
+
 }
